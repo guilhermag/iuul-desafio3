@@ -94,6 +94,8 @@ npm run start:dev
 npm run build
 ```
 
+**_O comando de build pode gerar erros no Windows, por causa do rimraf, usuários de Windows deverão deletar a pasta /build manualmente (caso ela ja exista) e rodar o comando novamente._**
+
 ## Créditos
 
 Desenvolvido por Guilherme de Araujo Gabriel.
