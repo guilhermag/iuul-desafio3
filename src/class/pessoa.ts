@@ -1,6 +1,6 @@
 import { Cargo } from './cargo';
 import { ContaCorrente, ContaPoupanca } from './conta';
-import { Endereco } from './Endereco';
+import { Endereco } from './endereco';
 
 interface IUsuario {
   autenticar(): boolean;
