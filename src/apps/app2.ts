@@ -1,4 +1,4 @@
-import { Cliente } from '../class/cliente';
+import { Cliente } from '../class';
 import { Endereco } from '../class/model/pessoa';
 
 export function aplicacao2() {

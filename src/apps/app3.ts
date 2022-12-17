@@ -1,5 +1,4 @@
-import { Cliente } from '../class/cliente';
-import { ContaCorrente } from '../class/contaCorrente';
+import { Cliente, ContaCorrente } from '../class';
 
 export function aplicacao3() {
   console.log('\n----- Aplicacao 3 -----\n');

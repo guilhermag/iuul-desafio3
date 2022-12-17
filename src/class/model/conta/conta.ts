@@ -47,10 +47,6 @@ export abstract class Conta {
     });
   }
 
-  protected retornarNumeroConta(): string {
-    return this.numero;
-  }
-
   protected realizarCredito(
     valor: number,
     dataOperacao: Date = new Date(),
@@ -81,26 +77,42 @@ export abstract class Conta {
     );
   }
 
-  public depositar(valor: number, dataOperacao: Date = new Date()) {
-    this.realizarCredito(valor, dataOperacao);
-    console.log(
-      `Operacao realizada com sucesso para a conta ${this.retornarNumeroConta()}`
-    );
+  public getNumeroConta(): string {
+    return this.numero;
   }
 
-  public sacar(valor: number, dataOperacao: Date = new Date()) {
+  public depositar(
+    valor: number,
+    dataOperacao: Date = new Date(),
+    operacaoNormal: boolean = true
+  ) {
+    this.realizarCredito(valor, dataOperacao);
+    if (operacaoNormal) {
+      console.log(
+        `Depósito de R$ ${valor} realizado para a conta ${this.getNumeroConta()}.`
+      );
+    }
+  }
+
+  public sacar(
+    valor: number,
+    dataOperacao: Date = new Date(),
+    operacaoNormal: boolean = true
+  ) {
     const creditos = this.calcularSomaCreditos();
     const debitos = this.calcularSomaDebitos();
     const saldo = creditos - debitos;
 
     if (valor < saldo) {
       this.realizarDebito(valor, dataOperacao);
-      console.log(
-        `Operacao realizada com sucesso para a conta ${this.retornarNumeroConta()}`
-      );
+      if (operacaoNormal) {
+        console.log(
+          `Saque de R$ ${valor} realizado para a conta ${this.getNumeroConta()}.`
+        );
+      }
     } else {
       console.log(
-        `Usuario da conta ${this.retornarNumeroConta()}, não possue saldo para essa operacao.`
+        `Usuario da conta ${this.getNumeroConta()}, não possue saldo para essa operacao.`
       );
     }
   }

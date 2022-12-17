@@ -1,5 +1,5 @@
-import { Funcionario } from '../class/funcionario';
-import { Cargo } from '../class/model/pessoa/cargo';
+import { Funcionario } from '../class';
+import { Cargo } from '../class/model/pessoa';
 
 export function aplicacao1() {
   const cargoGerente = new Cargo('Gerente');

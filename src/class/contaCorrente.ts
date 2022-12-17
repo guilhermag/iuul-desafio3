@@ -12,6 +12,10 @@ export class ContaCorrente extends Conta {
     this.limite = valor;
   }
 
+  private getLimite(): number {
+    return this.limite;
+  }
+
   private calcularSaldoBruto(): number {
     const creditos = this.calcularSomaCreditos();
     const debitos = this.calcularSomaDebitos();
@@ -20,30 +24,36 @@ export class ContaCorrente extends Conta {
 
   public calcularSaldo(): number {
     const saldo = this.calcularSaldoBruto();
-    const saldoFinal = saldo + this.limite;
+    const limite = this.getLimite();
+    const saldoFinal = saldo + limite;
     console.log(
-      `A conta ${this.retornarNumeroConta()} possui R$ ${saldo} de saldo e R$ ${
-        this.limite
-      } de limite`
+      `A conta ${this.getNumeroConta()} possui R$ ${saldo} de saldo e R$ ${limite} de limite`
     );
 
     return saldoFinal;
   }
 
-  public sacar(valor: number, dataOperacao: Date = new Date()) {
-    const saldo = this.calcularSaldo();
+  public sacar(
+    valor: number,
+    dataOperacao: Date = new Date(),
+    operacaoNormal: boolean = true
+  ) {
+    const saldo = this.calcularSaldoBruto();
+    const limite = this.getLimite();
 
-    if (valor < saldo) {
-      if (valor > this.calcularSaldoBruto()) {
-        this.atualizarLimite(this.limite - valor);
+    if (valor <= saldo + limite) {
+      if (valor > saldo) {
+        this.atualizarLimite(limite + saldo - valor);
       }
       this.realizarDebito(valor, dataOperacao);
-      console.log(
-        `Operacao realizada com sucesso para a conta ${this.retornarNumeroConta()}`
-      );
+      if (operacaoNormal) {
+        console.log(
+          `Saque de R$ ${valor} realizado para a conta ${this.getNumeroConta()}.`
+        );
+      }
     } else {
       console.log(
-        `Usuario da conta ${this.retornarNumeroConta()}, não possue saldo ou limite para essa operacao.`
+        `Usuario da conta ${this.getNumeroConta()}, não possue saldo ou limite para essa operacao.`
       );
     }
   }
@@ -53,11 +63,15 @@ export class ContaCorrente extends Conta {
     valor: number,
     dataOperacao: Date = new Date()
   ) {
-    const saldo = this.calcularSaldo();
-    this.sacar(valor, dataOperacao);
-    if (saldo === this.calcularSaldo()) {
+    const limite = this.getLimite();
+    const saldo = this.calcularSaldoBruto();
+    this.sacar(valor, dataOperacao, false);
+    if (saldo + limite === this.calcularSaldoBruto() + this.getLimite()) {
       return;
     }
-    contaDestino.depositar(valor, dataOperacao);
+    contaDestino.depositar(valor, dataOperacao, false);
+    console.log(
+      `Transferencia de R$ ${valor} realizada da conta ${this.getNumeroConta()} para a conta ${contaDestino.getNumeroConta()}.`
+    );
   }
 }
