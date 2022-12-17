@@ -44,3 +44,5 @@ class Credito extends Operacao {
     super(dataOperacao, valor, descricao);
   }
 }
+
+export { Debito, Credito };

@@ -1,3 +1,5 @@
+import { Credito, Debito } from './operacao';
+
 export abstract class Conta {
   private numero: string;
   private debitos: Debito[];

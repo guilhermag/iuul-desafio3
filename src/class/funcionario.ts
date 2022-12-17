@@ -1,5 +1,4 @@
-import { Cargo } from './model/pessoa/cargo';
-import { Pessoa, IUsuario } from './model/pessoa/pessoa';
+import { Cargo, Pessoa, IUsuario } from './model/pessoa/';
 
 export class Funcionario extends Pessoa implements IUsuario {
   private salario: number;
@@ -21,3 +20,7 @@ export class Funcionario extends Pessoa implements IUsuario {
     return true;
   }
 }
+
+Funcionario.prototype.toString = () => {
+  return 'Funcionario';
+};

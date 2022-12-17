@@ -1,10 +1,9 @@
 import { ContaPoupanca } from './contaPoupanca';
 import { ContaCorrente } from './contaCorrente';
-import { Endereco } from './model/pessoa/endereco';
-import { IUsuario, Pessoa } from './model/pessoa/pessoa';
+import { Endereco, IUsuario, Pessoa } from './model/pessoa';
 
 export class Cliente extends Pessoa implements IUsuario {
-  private enderecos: Endereco[] = [];
+  private enderecos: Set<Endereco> = new Set<Endereco>();
   private vip: boolean;
   private contasCorrentes: ContaCorrente[] = [];
   private contasPoupanca: ContaPoupanca[] = [];
@@ -13,11 +12,9 @@ export class Cliente extends Pessoa implements IUsuario {
     cpf: string,
     nome: string,
     telefone: string,
-    endereco: Endereco,
     vip: boolean = false
   ) {
     super(cpf, nome, telefone);
-    this.enderecos.push(endereco);
     this.vip = vip;
   }
 
@@ -42,10 +39,10 @@ export class Cliente extends Pessoa implements IUsuario {
   }
 
   public adicionarEndereco(endereco: Endereco) {
-    this.enderecos.push(endereco);
+    this.enderecos.add(endereco);
   }
 
-  public listarEnderecos(): Endereco[] {
+  public listarEnderecos(): Set<Endereco> {
     return this.enderecos;
   }
 }

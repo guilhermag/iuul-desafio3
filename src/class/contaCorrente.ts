@@ -12,10 +12,20 @@ export class ContaCorrente extends Conta {
     this.limite = valor;
   }
 
-  public calcularSaldo(): number {
+  private calcularSaldoBruto(): number {
     const creditos = this.calcularSomaCreditos();
     const debitos = this.calcularSomaDebitos();
-    const saldoFinal = creditos - debitos + this.limite;
+    return creditos - debitos;
+  }
+
+  public calcularSaldo(): number {
+    const saldo = this.calcularSaldoBruto();
+    const saldoFinal = saldo + this.limite;
+    console.log(
+      `A conta ${this.retornarNumeroConta()} possui R$ ${saldo} de saldo e R$ ${
+        this.limite
+      } de limite`
+    );
 
     return saldoFinal;
   }
@@ -24,7 +34,9 @@ export class ContaCorrente extends Conta {
     const saldo = this.calcularSaldo();
 
     if (valor < saldo) {
-      this.atualizarLimite(saldo - valor);
+      if (valor > this.calcularSaldoBruto()) {
+        this.atualizarLimite(this.limite - valor);
+      }
       this.realizarDebito(valor, dataOperacao);
       console.log(
         `Operacao realizada com sucesso para a conta ${this.retornarNumeroConta()}`
