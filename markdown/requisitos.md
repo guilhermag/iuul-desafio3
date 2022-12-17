@@ -39,22 +39,22 @@ Aqui estão os requisitos do desafio.
      definição da estrutura de dados a ser utilizada para representar o atributo de uma determinada
      classe.
 - [ ] 5. **Criação de Objetos:**
-  - [ ] Aplicação 1
-    - [ ] Crie dois funcionários do banco, um gerente e um atendente.
-  - [ ] Aplicação 2
-    - [ ] Crie um cliente e adicione 3 endereços a ele
-    - [ ] Imprima os endereços desse cliente
-  - [ ] Aplicação 3
-    - [ ] Crie um cliente que possua uma ContaCorrente
-    - [ ] Efetue três depósitos de 100 nessa ContaCorrente
-    - [ ] Efetue um saque de 50 reais nessa ContaCorrente
-    - [ ] Imprima o valor do saldo dessa ContaCorrente
-  - [ ] Aplicação 4
-    - [ ] Crie um cliente que possua uma ContaCorrente
-    - [ ] Efetue um depósito de 1000 nessa ContaCorrente
-    - [ ] Crie um cliente que possua uma ContaPoupanca
-    - [ ] Efetue um depósito de 1000 reais nessa conta Poupanca
-    - [ ] Efetue uma transferência de 500 reais da ContaCorrente para ContaPoupanca
+  - [x] Aplicação 1
+    - [x] Crie dois funcionários do banco, um gerente e um atendente.
+  - [x] Aplicação 2
+    - [x] Crie um cliente e adicione 3 endereços a ele
+    - [x] Imprima os endereços desse cliente
+  - [x] Aplicação 3
+    - [x] Crie um cliente que possua uma ContaCorrente
+    - [x] Efetue três depósitos de 100 nessa ContaCorrente
+    - [x] Efetue um saque de 50 reais nessa ContaCorrente
+    - [x] Imprima o valor do saldo dessa ContaCorrente
+  - [x] Aplicação 4
+    - [x] Crie um cliente que possua uma ContaCorrente
+    - [x] Efetue um depósito de 1000 nessa ContaCorrente
+    - [x] Crie um cliente que possua uma ContaPoupanca
+    - [x] Efetue um depósito de 1000 reais nessa conta Poupanca
+    - [x] Efetue uma transferência de 500 reais da ContaCorrente para ContaPoupanca
   - [ ] Aplicação 5
     - [ ] Crie um cliente que possua uma ContaPoupanca
     - [ ] Defina a rentabilidadeMensal em 1%

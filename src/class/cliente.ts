@@ -3,7 +3,7 @@ import { ContaCorrente } from './contaCorrente';
 import { Endereco, IUsuario, Pessoa } from './model/pessoa';
 
 export class Cliente extends Pessoa implements IUsuario {
-  private enderecos: Set<Endereco> = new Set<Endereco>();
+  private enderecos: Set<Endereco> = new Set();
   private vip: boolean;
   private contasCorrentes: ContaCorrente[] = [];
   private contasPoupanca: ContaPoupanca[] = [];
