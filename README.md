@@ -10,22 +10,22 @@ O diagrama de classes utilizadas para esse projeto foi.
 
 ### Requisitos
 
-- [ ] 1. **Criação das Classes Abstratas:** as Classes Conta e Pessoa são classes abstratas, isto é,
+- [x] 1. **Criação das Classes Abstratas:** as Classes Conta e Pessoa são classes abstratas, isto é,
      não podem instanciar objetos, mas somente auxiliar na definição de outras classes.
-- [ ] 2. **Criação da interface IUsuario:** a interface IUsuario possui apenas a assinatura de um
+- [x] 2. **Criação da interface IUsuario:** a interface IUsuario possui apenas a assinatura de um
      método. Esse método, quando implementado nas classes que realizam a interface, deve
      retornar apenas True.
-- [ ] 3. **Criação das Classes Concretas:** as classes concretas são todas as demais classes. Repare
+- [x] 3. **Criação das Classes Concretas:** as classes concretas são todas as demais classes. Repare
      que algumas delas possuem relacionamento de herança com as classes abstratas existentes
      no modelo.
 
-  - [ ] a. **Método listarEnderecos() da classe Cliente:** o método deve imprimir no console
+  - [x] a. **Método listarEnderecos() da classe Cliente:** o método deve imprimir no console
         todos os endereços armazenados para um cliente.
-  - [ ] b. **Método depositar() da classe Conta:** cria um objeto do tipo Credito vinculado à
+  - [x] b. **Método depositar() da classe Conta:** cria um objeto do tipo Credito vinculado à
         conta que está recebendo o depósito.
-  - [ ] c. **Método sacar() da classe Conta:** cria um objeto do tipo Debito vinculado à conta
+  - [x] c. **Método sacar() da classe Conta:** cria um objeto do tipo Debito vinculado à conta
         que está sofrendo o saque. (conta não pode ter saldo negativo além do seu limite).
-  - [ ] d. **Método transferir() da classe ContaCorrente:** retira dinheiro da conta corrente de
+  - [x] d. **Método transferir() da classe ContaCorrente:** retira dinheiro da conta corrente de
         origem e envia para uma conta destino. (a conta não pode ter saldo negativo além
         do seu limite).
   - [ ] e. **Método calcularRendimento() da ContaPoupanca:** << Defina sua regra para
@@ -33,12 +33,12 @@ O diagrama de classes utilizadas para esse projeto foi.
   - [ ] f. **Método calcularSaldo() da ContaPoupanca:** soma o valor de todos os créditos e
         subtrai pela soma dos valores de todos os débitos. Além disso, soma o rendimento
         ao valor final.
-  - [ ] g. **Método calcularSaldo() da ContaCorrente:** soma o valor de todos os créditos e
+  - [x] g. **Método calcularSaldo() da ContaCorrente:** soma o valor de todos os créditos e
 
     subtrai pela soma dos valores de todos os débitos. Após, soma o valor do limite. Ao
     final, retorna o valor.
 
-- [ ] 4. **Criação dos Relacionamento entre Classes:** as linhas que ligam as classes são chamadas
+- [x] 4. **Criação dos Relacionamento entre Classes:** as linhas que ligam as classes são chamadas
      de associação. A existência de uma associação entre a Classe A e a Classe B significa, em
      programação, que existirá um atributo da Classe B na definição da Classe A e vice-versa (a
      depender da navegabilidade atribuída no modelo → direção da seta). As cardinalidades
