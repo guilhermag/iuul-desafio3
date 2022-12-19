@@ -1,8 +1,7 @@
-import { Cliente } from '../class';
+import { Cliente, ContaCorrente } from '../class';
 import { Endereco } from '../class/model/pessoa';
 
 export function aplicacao2() {
-  const clienteGuilherme = new Cliente('98998777885', 'Guilherme', '998955887');
   const amazon = new Endereco(
     '04551-065',
     'Edificio JK, Avenida Chedid Jafet',
@@ -29,10 +28,15 @@ export function aplicacao2() {
     'Sao Paulo',
     'SP'
   );
-
+  const clienteGuilherme = new Cliente(
+    '98998777885',
+    'Guilherme',
+    '998955887',
+    netflix,
+    new ContaCorrente('56745')
+  );
   clienteGuilherme.adicionarEndereco(amazon);
   clienteGuilherme.adicionarEndereco(google);
-  clienteGuilherme.adicionarEndereco(netflix);
 
   console.log('\n----- Aplicacao 2 -----\n');
   console.log(clienteGuilherme.listarEnderecos(), '\n');

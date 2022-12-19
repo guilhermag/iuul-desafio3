@@ -1,41 +1,37 @@
 import { ContaPoupanca } from './contaPoupanca';
 import { ContaCorrente } from './contaCorrente';
 import { Endereco, IUsuario, Pessoa } from './model/pessoa';
+import { Conta } from './model/conta';
 
 export class Cliente extends Pessoa implements IUsuario {
   private enderecos: Set<Endereco> = new Set();
   private vip: boolean;
-  private contasCorrentes: ContaCorrente[] = [];
-  private contasPoupanca: ContaPoupanca[] = [];
+  private contas: Conta[] = [];
 
   constructor(
     cpf: string,
     nome: string,
     telefone: string,
+    endereco: Endereco,
+    conta: Conta,
     vip: boolean = false
   ) {
     super(cpf, nome, telefone);
     this.vip = vip;
+    this.enderecos.add(endereco);
+    this.contas.push(conta);
   }
 
   public autenticar(): boolean {
     return true;
   }
 
-  public criarContaCorrente(contaCorrente: ContaCorrente) {
-    this.contasCorrentes.push(contaCorrente);
+  public criarConta(conta: Conta) {
+    this.contas.push(conta);
   }
 
-  public listarContasCorrente(): ContaCorrente[] {
-    return this.contasCorrentes;
-  }
-
-  public criarContaPoupanca(contaPoupanca: ContaPoupanca) {
-    this.contasPoupanca.push(contaPoupanca);
-  }
-
-  public listarContasPoupanca(): ContaPoupanca[] {
-    return this.contasPoupanca;
+  public listarContas(): Conta[] {
+    return this.contas;
   }
 
   public adicionarEndereco(endereco: Endereco) {

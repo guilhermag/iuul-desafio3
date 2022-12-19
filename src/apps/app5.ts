@@ -1,10 +1,27 @@
 import { Cliente, ContaPoupanca } from '../class';
+import { Endereco } from '../class/model/pessoa';
 
 export function aplicacao5() {
   console.log('\n----- Aplicacao 5 -----\n');
-  const clienteGuilherme = new Cliente('98998777885', 'Guilherme', '998955887');
+
+  const netflix = new Endereco(
+    '06455-911',
+    'Alameda Xingu',
+    '350',
+    'Alphaville Industrial',
+    'Sao Paulo',
+    'SP'
+  );
+
   const contaPoupancaGuilherme = new ContaPoupanca('333', new Date(2022, 0, 1));
-  clienteGuilherme.criarContaPoupanca(contaPoupancaGuilherme);
+  const clienteGuilherme = new Cliente(
+    '98998777885',
+    'Guilherme',
+    '998955887',
+    netflix,
+    contaPoupancaGuilherme
+  );
+  clienteGuilherme.criarConta(contaPoupancaGuilherme);
   contaPoupancaGuilherme.depositar(200, new Date(2022, 0, 10));
   contaPoupancaGuilherme.depositar(200, new Date(2022, 1, 10));
   contaPoupancaGuilherme.depositar(200, new Date(2022, 2, 10));
