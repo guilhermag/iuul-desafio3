@@ -20,7 +20,3 @@ export class Funcionario extends Pessoa implements IUsuario {
     return true;
   }
 }
-
-Funcionario.prototype.toString = () => {
-  return 'Funcionario';
-};

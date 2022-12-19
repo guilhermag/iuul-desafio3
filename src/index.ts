@@ -10,4 +10,4 @@ import {
 // aplicacao2();
 // aplicacao3();
 // aplicacao4();
-aplicacao5();
+// aplicacao5();
