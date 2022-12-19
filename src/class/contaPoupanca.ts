@@ -1,7 +1,9 @@
+import { Credito } from './model/conta';
 import { Conta } from './model/conta/conta';
 
 export class ContaPoupanca extends Conta {
   private rentabilidadeMensal: number;
+  private historicoRendimentos: number[] = [];
 
   constructor(
     numero: string,
@@ -12,7 +14,28 @@ export class ContaPoupanca extends Conta {
     this.rentabilidadeMensal = Math.abs(rentabilidadeMensal / 100);
   }
 
-  private recuperarSaldo(dataDesejada: Date): number {
+  private arredondar(numero: number, decimal: number) {
+    return parseFloat(numero.toFixed(decimal));
+  }
+
+  private getHistoricoRendimentos(): number[] {
+    return this.historicoRendimentos;
+  }
+
+  private setHistoricoRendimentos(historico: number[]) {
+    this.historicoRendimentos = historico;
+  }
+
+  private mudarCredito(credito: Credito) {
+    const creditos = this.getCreditos();
+    const indice = creditos.findIndex(
+      (creditoOriginal) => creditoOriginal.getData() === credito.getData()
+    );
+    creditos[indice] = credito;
+    this.atualizarCreditos(creditos);
+  }
+
+  private getSaldo(dataDesejada: Date): number {
     const creditos = this.getCreditos(dataDesejada);
     let somaCreditos = 0;
     const debitos = this.getDebitos(dataDesejada);
@@ -23,38 +46,30 @@ export class ContaPoupanca extends Conta {
     return somaCreditos - somaDebitos;
   }
 
-  private recuperarOperacoes() {
-    // const creditos = this.getCreditos();
-    // const debitos = this.getDebitos();
-    // const anosOperacoes = creditos.map((credito) =>
-    //   credito.getData().getFullYear()
-    // );
-    // const anosSet = new Set(anosOperacoes);
-    // anosSet.forEach(ano => {
-    //   const mesesSet =
-    // })
-    // const resumoOperacoes= {'teste': 'teste123'};
-    // const result = Object.assign({}, resumoOperacoes, { teste2: 'teste' });
-    // return { creditos: creditos, debitos: debitos };
-  }
-
   private getUltimoDiaMes(ano: number, mes: number) {
-    return new Date(ano, mes + 1, 0).getDate();
+    const ultimoDiaMes = new Date(ano, mes + 1, 0).getDate();
+    return new Date(ano, mes, ultimoDiaMes);
   }
 
-  private criarArraySaldos() {
+  private duracaoContaMeses(): number {
     const dataCriacao = this.getDataCriacao();
     const dataAtual = new Date();
-    const saldos = [];
 
-    const mesesConta =
+    return (
       dataAtual.getFullYear() * 12 +
       dataAtual.getMonth() -
-      (dataCriacao.getFullYear() * 12 + dataCriacao.getMonth());
+      (dataCriacao.getFullYear() * 12 + dataCriacao.getMonth())
+    );
+  }
 
+  private atualizarRendimentos() {
+    const mesesConta = this.duracaoContaMeses();
+    const dataCriacao = this.getDataCriacao();
+    const historicoRendimentos = this.getHistoricoRendimentos();
     let contagemMes = dataCriacao.getMonth();
 
-    for (let i = 0; i < mesesConta; i++) {
+    for (let i = 0; i <= mesesConta; i++) {
+      // Cálculo dos meses e anos atuais
       let anoAtual = 0;
       let mesAtual = 0;
 
@@ -66,37 +81,65 @@ export class ContaPoupanca extends Conta {
         anoAtual = dataCriacao.getFullYear() + anosPassados;
         mesAtual = contagemMes - 12;
       }
-      const ultimoDiaMes = this.getUltimoDiaMes(anoAtual, mesAtual);
-      const dataUltimoDia = new Date(anoAtual, mesAtual, ultimoDiaMes);
 
-      const rentabilidadeMensal =
-        this.recuperarSaldo(dataUltimoDia) * this.rentabilidadeMensal;
-      this.realizarCredito(rentabilidadeMensal, dataUltimoDia, 'rendimentos');
+      const dataUltimoDia = this.getUltimoDiaMes(anoAtual, mesAtual);
+      const saldoUltimoDia = this.getSaldo(dataUltimoDia);
 
-      const data = `${dataUltimoDia.toLocaleString('default', {
-        month: 'long',
-      })} / ${dataUltimoDia.getFullYear()}`;
+      let rentabilidadeMensal = 0;
 
-      saldos.push({ data: data, rendimento: rentabilidadeMensal.toFixed(2) });
+      // Verificar se existem novos rendimentos
+      if (historicoRendimentos[i]) {
+        rentabilidadeMensal = saldoUltimoDia * this.rentabilidadeMensal;
+        const diferenca = rentabilidadeMensal - historicoRendimentos[i];
+        rentabilidadeMensal -= diferenca;
+
+        const checkMudancaRendimentos = !(
+          Math.round(historicoRendimentos[i]) ===
+          Math.round(rentabilidadeMensal)
+        );
+
+        if (checkMudancaRendimentos) {
+          this.mudarCredito(
+            new Credito(dataUltimoDia, rentabilidadeMensal, 'rendimentos')
+          );
+          historicoRendimentos[i] = rentabilidadeMensal;
+        }
+      } else {
+        // A primeira vez que os rendimentos são calculados também é populado o vetor de historicoRendimentos
+        rentabilidadeMensal = saldoUltimoDia * this.rentabilidadeMensal;
+        historicoRendimentos.push(rentabilidadeMensal);
+        this.realizarCredito(rentabilidadeMensal, dataUltimoDia, 'rendimentos');
+      }
+
       contagemMes++;
     }
-
-    return saldos;
+    this.setHistoricoRendimentos(historicoRendimentos);
   }
 
-  private atualizarRendimentos() {}
-
   public calcularRendimento() {
-    return this.criarArraySaldos();
+    this.atualizarRendimentos();
+    const creditos = this.getCreditos();
+    let rendimentos = 0;
+
+    creditos.forEach((credito: Credito) => {
+      if (credito.getDescricao() === 'rendimentos') {
+        rendimentos += credito.getValor();
+      }
+    });
+
+    return rendimentos;
   }
 
   public calcularSaldo(): number {
+    const rendimentos = this.arredondar(this.calcularRendimento(), 2);
     const creditos = this.calcularSomaCreditos();
     const debitos = this.calcularSomaDebitos();
-    const saldoFinal = creditos - debitos;
+    const saldoFinal = this.arredondar(creditos - debitos, 2);
+
+    console.log(
+      `A conta ${this.getNumeroConta()} possui saldo total de R$ ${saldoFinal}, sendo R$ ${rendimentos} de rendimentos até o momento.`
+    );
 
     return saldoFinal;
   }
-
-  public sacar(valor: number) {}
 }
