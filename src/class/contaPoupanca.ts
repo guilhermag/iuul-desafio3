@@ -14,6 +14,7 @@ export class ContaPoupanca extends Conta {
     this.rentabilidadeMensal = Math.abs(rentabilidadeMensal / 100);
   }
 
+  // Funcoes auxiliares
   private arredondar(numero: number, decimal: number) {
     return parseFloat(numero.toFixed(decimal));
   }
@@ -116,6 +117,7 @@ export class ContaPoupanca extends Conta {
     this.setHistoricoRendimentos(historicoRendimentos);
   }
 
+  // Funcoes principais
   public calcularRendimento() {
     this.atualizarRendimentos();
     const creditos = this.getCreditos();

@@ -8,6 +8,7 @@ export class ContaCorrente extends Conta {
     this.limite = limite;
   }
 
+  // Funcoes auxiliares
   private atualizarLimite(valor: number) {
     this.limite = valor;
   }
@@ -22,6 +23,7 @@ export class ContaCorrente extends Conta {
     return creditos - debitos;
   }
 
+  // Funcoes principais
   public calcularSaldo(): number {
     const saldo = this.calcularSaldoBruto();
     const limite = this.getLimite();

@@ -13,6 +13,7 @@ export abstract class Conta {
     this.dataCriacao = dataCriacao;
   }
 
+  // Funcoes auxiliares
   protected atualizarDebitos(novosDebitos: Debito[]) {
     this.debitos = novosDebitos;
   }
@@ -23,28 +24,6 @@ export abstract class Conta {
 
   protected getDataCriacao(): Date {
     return this.dataCriacao;
-  }
-
-  public getDebitos(dataFiltro: Date = new Date()): Debito[] {
-    const anoFiltro = dataFiltro.getFullYear();
-    const mesFiltro = dataFiltro.getMonth();
-
-    return this.debitos.filter((debito) => {
-      const anoDebito = debito.getData().getFullYear();
-      const mesDebito = debito.getData().getMonth();
-      return anoDebito <= anoFiltro && mesDebito <= mesFiltro;
-    });
-  }
-
-  public getCreditos(dataFiltro: Date = new Date()): Credito[] {
-    const anoFiltro = dataFiltro.getFullYear();
-    const mesFiltro = dataFiltro.getMonth();
-
-    return this.creditos.filter((credito) => {
-      const anoCredito = credito.getData().getFullYear();
-      const mesCredito = credito.getData().getMonth();
-      return anoCredito <= anoFiltro && mesCredito <= mesFiltro;
-    });
   }
 
   protected realizarCredito(
@@ -77,8 +56,31 @@ export abstract class Conta {
     );
   }
 
+  // Funcoes principais
   public getNumeroConta(): string {
     return this.numero;
+  }
+
+  public getDebitos(dataFiltro: Date = new Date()): Debito[] {
+    const anoFiltro = dataFiltro.getFullYear();
+    const mesFiltro = dataFiltro.getMonth();
+
+    return this.debitos.filter((debito) => {
+      const anoDebito = debito.getData().getFullYear();
+      const mesDebito = debito.getData().getMonth();
+      return anoDebito <= anoFiltro && mesDebito <= mesFiltro;
+    });
+  }
+
+  public getCreditos(dataFiltro: Date = new Date()): Credito[] {
+    const anoFiltro = dataFiltro.getFullYear();
+    const mesFiltro = dataFiltro.getMonth();
+
+    return this.creditos.filter((credito) => {
+      const anoCredito = credito.getData().getFullYear();
+      const mesCredito = credito.getData().getMonth();
+      return anoCredito <= anoFiltro && mesCredito <= mesFiltro;
+    });
   }
 
   public depositar(

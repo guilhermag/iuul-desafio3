@@ -20,9 +20,9 @@ Aqui estão os requisitos do desafio.
   - [x] d. **Método transferir() da classe ContaCorrente:** retira dinheiro da conta corrente de
         origem e envia para uma conta destino. (a conta não pode ter saldo negativo além
         do seu limite).
-  - [ ] e. **Método calcularRendimento() da ContaPoupanca:** << Defina sua regra para
+  - [x] e. **Método calcularRendimento() da ContaPoupanca:** << Defina sua regra para
         cálculo de rendimento da conta poupança >>
-  - [ ] f. **Método calcularSaldo() da ContaPoupanca:** soma o valor de todos os créditos e
+  - [x] f. **Método calcularSaldo() da ContaPoupanca:** soma o valor de todos os créditos e
         subtrai pela soma dos valores de todos os débitos. Além disso, soma o rendimento
         ao valor final.
   - [x] g. **Método calcularSaldo() da ContaCorrente:** soma o valor de todos os créditos e
@@ -38,7 +38,7 @@ Aqui estão os requisitos do desafio.
      existir se ligando com um objeto da classe A (e vice-versa). Esses números vão auxiliar na
      definição da estrutura de dados a ser utilizada para representar o atributo de uma determinada
      classe.
-- [ ] 5. **Criação de Objetos:**
+- [x] 5. **Criação de Objetos:**
   - [x] Aplicação 1
     - [x] Crie dois funcionários do banco, um gerente e um atendente.
   - [x] Aplicação 2
@@ -55,12 +55,12 @@ Aqui estão os requisitos do desafio.
     - [x] Crie um cliente que possua uma ContaPoupanca
     - [x] Efetue um depósito de 1000 reais nessa conta Poupanca
     - [x] Efetue uma transferência de 500 reais da ContaCorrente para ContaPoupanca
-  - [ ] Aplicação 5
-    - [ ] Crie um cliente que possua uma ContaPoupanca
-    - [ ] Defina a rentabilidadeMensal em 1%
-    - [ ] Efetue 1 depósito por mês de 200 reais do dia 01/01/2022 até 31/12/2022
-    - [ ] Efetue um saque de 100 reais no dia 05/03/2022
-    - [ ] Efetue um saque de 200 reais no dia 08/07/2022
-    - [ ] Calcule o saldo da conta poupança considerando os rendimentos
+  - [x] Aplicação 5
+    - [x] Crie um cliente que possua uma ContaPoupanca
+    - [x] Defina a rentabilidadeMensal em 1%
+    - [x] Efetue 1 depósito por mês de 200 reais do dia 01/01/2022 até 31/12/2022
+    - [x] Efetue um saque de 100 reais no dia 05/03/2022
+    - [x] Efetue um saque de 200 reais no dia 08/07/2022
+    - [x] Calcule o saldo da conta poupança considerando os rendimentos
 
 Para retornar a documentação principal clique [aqui](../README.md).
